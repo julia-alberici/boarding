@@ -49,7 +49,7 @@ export function TaskList({ listId }: TaskListProps) {
                 </div>
             ) : (
                 <>
-                    {listTasks.map((task: Task, index: number) => (
+                    {listTasks?.map((task: Task, index: number) => (
                         <TaskCard
                             index={index}
                             key={task.id}

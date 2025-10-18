@@ -100,7 +100,7 @@ export class TaskService {
         await prisma.task.delete({ where: { id } });
     }
 
-    async updateTaskPosition(id: string, newPosition: number, listId: string): Promise<Task> {
+    async updateTaskPosition(id: string, newPosition: number, listId: string): Promise<Task[]> {
         const task = await prisma.task.findUnique({ where: { id } });
 
         if (!task) {
@@ -127,17 +127,6 @@ export class TaskService {
             )
         );
 
-        return prisma.task.findUnique({
-            where: { id },
-            include: {
-                assignedTo: {
-                    select: {
-                        id: true,
-                        name: true,
-                        email: true,
-                    },
-                },
-            },
-        }) as Promise<Task>;
+        return updatedTasks;
     }
 }

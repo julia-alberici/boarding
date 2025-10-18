@@ -46,7 +46,7 @@ export function DraggableList({ list }: DraggableListProps) {
                             }`}
                     >
                         <div className="space-y-2">
-                            {listTasks.map((task, index) => (
+                            {listTasks?.map((task, index) => (
                                 <TaskCard
                                     key={task.id}
                                     task={task}

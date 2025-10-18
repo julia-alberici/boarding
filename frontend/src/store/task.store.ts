@@ -120,39 +120,37 @@ export const useTaskStore = create<TaskState>((set) => ({
         try {
             set({ isLoading: true, error: null });
 
-            const response = await api.patch(`/api/tasks/${id}/position`, {
+            await api.patch(`/api/tasks/${id}/position`, {
                 position: newPosition,
                 listId: newListId
             });
-
-            set(state => {
-                const updatedTask = response.data;
-
-                // If moving within the same list
-                if (currentListId === newListId) {
+            // If moving within the same list
+            if (currentListId === newListId) {
+                const dataNewList = await api.get(`/api/tasks`, { params: { listId: newListId } });
+                set(state => {
                     return {
                         tasks: {
                             ...state.tasks,
-                            [newListId]: state.tasks[newListId]?.map(task =>
-                                task.id === id ? { ...task, ...updatedTask } : task
-                            ) || []
+                            [newListId]: dataNewList?.data || [],
                         },
                         isLoading: false
                     };
-                }
+                });
+            }else {
+                const data = await api.get(`/api/tasks`, { params: { listId: currentListId } });
+                const dataNewList = await api.get(`/api/tasks`, { params: { listId: newListId } });
+                set(state => {
+                    return {
+                        tasks: {
+                            ...state.tasks,
+                            [newListId]: dataNewList?.data || [],
+                            [currentListId]: data.data || []
+                        },
+                        isLoading: false
+                    };
+                }); 
+            }
 
-                // If moving to a different list
-                return {
-                    tasks: {
-                        ...state.tasks,
-                        // Remove from old list
-                        [currentListId]: state.tasks[currentListId]?.filter(task => task.id !== id) || [],
-                        // Add to new list
-                        [newListId]: [...(state.tasks[newListId] || []), updatedTask]
-                    },
-                    isLoading: false
-                };
-            });
         } catch (error: any) {
             set({
                 error: error.response?.data?.message || 'Error moving task',
