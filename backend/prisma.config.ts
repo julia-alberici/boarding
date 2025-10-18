@@ -1,7 +1,7 @@
 import path from "path";
+import type { PrismaConfig } from 'prisma';
 import "dotenv/config";
 
 export default {
-    schema: path.join(__dirname, 'prisma/schema.prisma'),
-    output: path.join(__dirname, 'src/generated/prisma')
-};
+    schema: path.join('prisma'),
+} satisfies PrismaConfig;

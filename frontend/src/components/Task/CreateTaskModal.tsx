@@ -6,7 +6,6 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { AlertCircle } from 'lucide-react';
 import { Alert, AlertDescription } from '../UI/alert';
 import { Label } from '../Board/label';
-import { Badge } from '../UI/badge';
 import { getPriorityLabel } from '../../lib/utils';
 
 interface CreateTaskModalProps {
@@ -114,8 +113,8 @@ export function CreateTaskModal({ listId, open, onClose, onSubmit, isLoading }: 
                                     key={p}
                                     onClick={() => setPriority(p)}
                                     className={`px-3 py-1 rounded-full text-sm transition-colors ${priority === p
-                                            ? 'bg-primary text-white'
-                                            : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
+                                        ? 'bg-primary text-white'
+                                        : 'bg-neutral-800 text-neutral-300 hover:bg-neutral-700'
                                         }`}
                                 >
                                     {getPriorityLabel(p)}

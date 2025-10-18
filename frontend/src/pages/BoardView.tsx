@@ -14,7 +14,7 @@ export function BoardView() {
     const navigate = useNavigate();
     const { id } = useParams<{ id: string; }>();
     const { currentBoard, isLoading: boardLoading, error: boardError, fetchBoardById } = useBoardStore();
-    const { lists, isLoading: listLoading, fetchListsByBoardId } = useListStore();
+    const { lists, fetchListsByBoardId } = useListStore();
     const { moveTask } = useTaskStore();
 
     useEffect(() => {

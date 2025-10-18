@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '../UI/Button';
 import { TaskCard } from '../Task';
 import { CreateTaskModal } from '../Task/CreateTaskModal';
+import type { Task } from '../../types';
 import { useTaskStore } from '../../store/task.store';
 
 interface TaskListProps {
@@ -10,7 +11,7 @@ interface TaskListProps {
 
 export function TaskList({ listId }: TaskListProps) {
     const [showCreateModal, setShowCreateModal] = useState(false);
-    const { isLoading, error, createTask, fetchTasks } = useTaskStore();
+    const { isLoading, error, createTask, fetchTasks, tasks } = useTaskStore();
 
     useEffect(() => {
         fetchTasks(listId).catch(console.error);
@@ -48,7 +49,7 @@ export function TaskList({ listId }: TaskListProps) {
                 </div>
             ) : (
                 <>
-                    {listTasks.map((task, index) => (
+                    {listTasks.map((task: Task, index: number) => (
                         <TaskCard
                             index={index}
                             key={task.id}
