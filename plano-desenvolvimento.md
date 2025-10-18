@@ -77,7 +77,7 @@ Desenvolvimento de uma aplicação web de gerenciamento de tarefas inspirada em 
 ├── Drag & Drop: hello-pangea-dnd
 ├── Forms: Controlled components simples
 ├── HTTP Client: Axios com interceptors
-└── Deploy: Vercel/Netlify (rápido e grátis)
+└── Deploy: Vercel/Netlify
 ```
 
 ### 3.2 Arquitetura de Sistema Simplificada
