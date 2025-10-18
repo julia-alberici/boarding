@@ -1,0 +1,43 @@
+export enum AuthErrorCode {
+    MISSING_FIELDS = 'AUTH_MISSING_FIELDS',
+    PASSWORD_TOO_SHORT = 'AUTH_PASSWORD_TOO_SHORT',
+    USER_ALREADY_EXISTS = 'AUTH_USER_ALREADY_EXISTS',
+    INVALID_CREDENTIALS = 'AUTH_INVALID_CREDENTIALS',
+    USER_NOT_FOUND = 'AUTH_USER_NOT_FOUND',
+    NO_TOKEN = 'AUTH_NO_TOKEN',
+    INVALID_TOKEN = 'AUTH_INVALID_TOKEN',
+    EXPIRED_TOKEN = 'AUTH_EXPIRED_TOKEN',
+    INVALID_EMAIL = 'INVALID_EMAIL'
+}
+
+export enum GeneralErrorCode {
+    INTERNAL_SERVER_ERROR = 'INTERNAL_SERVER_ERROR',
+    ROUTE_NOT_FOUND = 'ROUTE_NOT_FOUND',
+    VALIDATION_ERROR = 'VALIDATION_ERROR'
+}
+
+export class ApiError extends Error {
+    constructor(message: string, public statusCode: number) {
+        super(message);
+        this.name = 'ApiError';
+    }
+}
+
+export interface ErrorResponse {
+    code: AuthErrorCode | GeneralErrorCode | string;
+    details?: any;
+}
+
+export class NotFoundError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'NotFoundError';
+    }
+}
+
+export class UnauthorizedError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = 'UnauthorizedError';
+    }
+}

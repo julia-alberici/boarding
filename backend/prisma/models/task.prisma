@@ -1,0 +1,19 @@
+model Task {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  priority    Priority @default(MEDIUM)
+  position    Int
+  listId      String
+  list        List     @relation(fields: [listId], references: [id], onDelete: Cascade)
+  assignedId  String?
+  assignedTo  User?    @relation(fields: [assignedId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+}
