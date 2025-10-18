@@ -40,5 +40,5 @@ app.use(errorHandler);
 app.listen(PORT, () => {
     console.log(`🚀 Server running on port ${PORT}`);
     console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
-    console.log(`🔗 API: http://localhost:${PORT}/api`);
+    console.log(`🔗 API: ${process.env.FRONTEND_URL || 'http://localhost'}${PORT}}/api`);
 });
